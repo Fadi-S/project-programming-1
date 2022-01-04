@@ -238,6 +238,7 @@ void printEmployees(int n, Employee **employees)
 void saveData(int n, Employee **employees)
 {
     FILE *file = fopen("employees.txt", "w");
+    validateFile(file);
     for (int i = 0; i < n; i++) {
         char *employeeStr = serializeEmployee(employees[i]);
 
