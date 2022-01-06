@@ -47,7 +47,6 @@ Employee *initEmployee(int id, char *first_name, char *last_name, int salary, ch
     strcpy(employee->phone, phone);
     strcpy(employee->address, address);
     employee->birthday = initDate(day, month, year);
-
     return employee;
 }
 
@@ -261,7 +260,48 @@ Employee ** addEmployee(int *n, Employee ** employees) {
 
     return employees;
 }
+void Merge(char* arr[],int low,int mid,int high)
+{
+    int nL= mid-low+1;
+    int nR= high-mid;
 
+    char** L=malloc(sizeof(char *)*nL);
+    char** R=malloc(sizeof(char *)*nR);
+    int i;
+    for(i=0;i<nL;i++)
+    {
+        L[i]=malloc(sizeof(arr[low+i]));
+        strcpy(L[i],arr[low+i]);
+    }
+    for(i=0;i<nR;i++)
+    {
+        R[i]=malloc(sizeof(arr[mid+i+1]));
+        strcpy(R[i],arr[mid+i+1]);
+    }
+    int j=0,k;
+    i=0;
+    k=low;
+    while(i<nL&&j<nR)
+    {
+        if(strcmp(L[i],R[j])<0)strcpy(arr[k++],L[i++]);
+        else strcpy(arr[k++],R[j++]);
+    }
+    while(i<nL)strcpy(arr[k++],L[i++]);
+    while(j<nR)strcpy(arr[k++],R[j++]);
+
+}
+
+
+void MergeSort(char* arr[],int low,int high)
+{
+    if(low<high)
+    {
+        int mid=(low+high)/2;
+        MergeSort(arr,low,mid);
+        MergeSort(arr,mid+1,high);
+        Merge(arr,low,mid,high);
+    }
+}
 void printMenu()
 {
     printf("\n");
