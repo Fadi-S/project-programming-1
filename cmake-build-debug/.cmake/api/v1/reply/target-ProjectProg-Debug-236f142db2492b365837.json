@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "ProjectProg.exe"
-		},
-		{
-			"path" : "ProjectProg.pdb"
+			"path" : "ProjectProg"
 		}
 	],
 	"backtrace" : 1,
@@ -38,7 +35,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.sdk"
 				},
 				{
 					"fragment" : "-std=gnu99"
@@ -73,16 +70,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
 	"name" : "ProjectProg",
-	"nameOnDisk" : "ProjectProg.exe",
+	"nameOnDisk" : "ProjectProg",
 	"paths" : 
 	{
 		"build" : ".",
@@ -96,9 +89,7 @@
 			[
 				0,
 				1,
-				3,
-				5,
-				6
+				3
 			]
 		},
 		{
@@ -139,16 +130,6 @@
 			"backtrace" : 1,
 			"path" : "helpers.h",
 			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "example.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "sort.cpp",
-			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "EXECUTABLE"

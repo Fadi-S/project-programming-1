@@ -6,7 +6,6 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.20"
@@ -39,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ProjectProg::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ProjectProg-Debug-0516170da6bb7e62af15.json",
+					"jsonFile" : "target-ProjectProg-Debug-236f142db2492b365837.json",
 					"name" : "ProjectProg",
 					"projectIndex" : 0
 				}
@@ -49,12 +48,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/USER/OneDrive/Documents/GitHub/project-programming-1/cmake-build-debug",
-		"source" : "C:/Users/USER/OneDrive/Documents/GitHub/project-programming-1"
+		"build" : "/Users/fadi/CLionProjects/Koleya/ProjectProg/cmake-build-debug",
+		"source" : "/Users/fadi/CLionProjects/Koleya/ProjectProg"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 3
+		"minor" : 2
 	}
 }
