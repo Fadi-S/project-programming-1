@@ -44,9 +44,9 @@ Employee *readEmployee() {
     char salary[10];
     char phone[20];
     char address[60];
-    unsigned int year;
-    unsigned int month;
-    unsigned int day;
+    unsigned int year = 2020;
+    unsigned int month = 0;
+    unsigned int day = 0;
 
     int valid;
     do {
