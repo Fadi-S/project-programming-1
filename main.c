@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "employee.h"
 #include "validation.h"
 #include "helpers.h"
@@ -130,9 +131,9 @@ Employee *deserializeEmployee(char employee[200]) {
     int salary;
     char phone[20];
     char address[60];
-    unsigned int year;
-    unsigned int month;
-    unsigned int day;
+    unsigned int year = 2022;
+    unsigned int month = 0;
+    unsigned int day = 0;
 
     int i = 0;
 
@@ -349,31 +350,49 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
 
     return employees;
 }
+void modifyEmployees(int n,Employee **employees)
+{
+    int i, id;
+    printf("Please enter employee's id: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < n; ++i)
+    {
+        if(employees[i]->id == id) {
+            printf("Please enter the new data: \n");
+            employees[i] = readEmployee();
+        }
+    }
+}
 
 void printMenu()
 {
     printf("\n");
-    printf("1. Search Employees\n");
-    printf("2. Add Employee\n");
-    printf("3. Delete Employee\n");
-    printf("4. Modify Employee\n");
-    printf("5. Print (Sort) Employees\n");
-    printf("6. Save Data\n");
-    printf("7. Quit\n");
+    printf("To Search employee:        Press (1) \n");
+    printf("To Add employee:           Press (2) \n");
+    printf("To Delete employee:        Press (3) \n");
+    printf("To Modify employee:        Press (4) \n");
+    printf("To Print employees (sort): Press (5) \n");
+    printf("To Save data:              Press (6) \n");
+    printf("To Quit:                   Press (7) \n");
 }
 
+
 int main() {
-    printf("Welcome, \n");
+    printf("Welcome To Our Programme, \n");
 
     int employeesCount;
     Employee ** employees = loadEmployees(&employeesCount);
 
-    int item;
+    char item;
 
     do {
         printMenu();
         printf("Enter command number: ");
-        scanf("%d", &item);
+        scanf("%c", &item);
+        if(isdigit(item)) {
+            item = item - '0';
+        }
         switch (item) {
             case 1:
                 searchEmployees(employeesCount, employees);
@@ -386,7 +405,7 @@ int main() {
                 employees = deleteEmployees(employees, &employeesCount);
                 break;
             case 4:
-                // TODO Modify
+                modifyEmployees(employeesCount, employees);
                 break;
             case 5:
                 sortEmployees(employeesCount, employees);
@@ -395,10 +414,11 @@ int main() {
                 saveData(employeesCount, employees);
                 break;
             case 7:
-                printf("\nBye!");
+                printf("\nSee You Next Time ;) ");
                 exit(0);
             default:
                 softError("Command not found!");
+
         }
     } while (item != 7);
 
