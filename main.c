@@ -188,7 +188,7 @@ Employee *deserializeEmployee(char employee[200]) {
 
     return initEmployee(id, first_name, last_name, salary, email, phone, address, day, month, year);
 }
-void Merge(char* arr[],int low,int mid,int high)
+void Merge(char*arr,int low,int mid,int high)
 {
     int nL= mid-low+1;
     int nR= high-mid;
@@ -267,9 +267,6 @@ void printEmployee(Employee *employee) {
         default:
             break;
     }
-
-
-
     printf("ID: %d, Name: %s %s, Salary: %d, Phone: %s, Address: %s, Birthday: %d/%d/%d\n", employee->id,
            employee->first_name, employee->last_name,
            employee->salary, employee->phone, employee->address,
