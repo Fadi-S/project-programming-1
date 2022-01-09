@@ -18,14 +18,35 @@ int isPhoneValid(char *str) {
     return valid;
 }
 
-int isAlphaNumeric(char str) {
-    return isalnum(str) || (str == '_') || (str == '.');
+int isSymbol(char str)
+{
+    return str == '_' || str == '.' || str == '-';
+}
+
+int isAllowed(char str) {
+    return isalnum(str) || isSymbol(str);
+}
+
+int isNumeric(char * str) {
+    for (int i = 0; i < strlen(str); ++i) {
+        if(! isdigit(str[i])) {
+            return 0;
+        }
+    }
+
+    return 1;
 }
 
 int isEmailValid(char *email) {
-    int at = 0, username = 0, domain = 0, ending = 0;
+    int at = 0, username = 0, domain = 0, ending = 0, symbol=0;
 
     for (int i = 0; i < strlen(email); ++i) {
+
+        if (symbol && isSymbol(email[i])) {
+            return 0;
+        }
+
+        symbol = isSymbol(email[i]);
 
         if (username && !at) {
             if (email[i] == '@') {
@@ -35,7 +56,7 @@ int isEmailValid(char *email) {
         }
 
         if (!username && !at) {
-            if (isAlphaNumeric(email[i])) {
+            if (isAllowed(email[i])) {
                 username = 1;
                 continue;
             } else {
@@ -45,7 +66,7 @@ int isEmailValid(char *email) {
         }
 
         if (at) {
-            if (isAlphaNumeric(email[i])) {
+            if (isAllowed(email[i])) {
                 domain = 1;
 
                 continue;
@@ -54,7 +75,7 @@ int isEmailValid(char *email) {
             }
         }
 
-        if (isAlphaNumeric(email[i])) {
+        if (isAllowed(email[i])) {
             ending = 1;
             continue;
         } else {

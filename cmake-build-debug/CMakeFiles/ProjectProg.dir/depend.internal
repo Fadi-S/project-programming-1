@@ -4,8 +4,13 @@
 CMakeFiles/ProjectProg.dir/helpers.c.o
  /Users/fadi/CLionProjects/Koleya/ProjectProg/helpers.c
 CMakeFiles/ProjectProg.dir/main.c.o
+ /Users/fadi/CLionProjects/Koleya/ProjectProg/employee.h
  /Users/fadi/CLionProjects/Koleya/ProjectProg/helpers.h
  /Users/fadi/CLionProjects/Koleya/ProjectProg/main.c
+ /Users/fadi/CLionProjects/Koleya/ProjectProg/sort.h
  /Users/fadi/CLionProjects/Koleya/ProjectProg/validation.h
+CMakeFiles/ProjectProg.dir/sort.c.o
+ /Users/fadi/CLionProjects/Koleya/ProjectProg/employee.h
+ /Users/fadi/CLionProjects/Koleya/ProjectProg/sort.c
 CMakeFiles/ProjectProg.dir/validation.c.o
  /Users/fadi/CLionProjects/Koleya/ProjectProg/validation.c

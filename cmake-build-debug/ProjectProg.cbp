@@ -76,6 +76,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/employee.h">
+			<Option target="ProjectProg"/>
+		</Unit>
 		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/helpers.c">
 			<Option target="ProjectProg"/>
 		</Unit>
@@ -83,6 +86,12 @@
 			<Option target="ProjectProg"/>
 		</Unit>
 		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/main.c">
+			<Option target="ProjectProg"/>
+		</Unit>
+		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/sort.c">
+			<Option target="ProjectProg"/>
+		</Unit>
+		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/sort.h">
 			<Option target="ProjectProg"/>
 		</Unit>
 		<Unit filename="/Users/fadi/CLionProjects/Koleya/ProjectProg/validation.c">

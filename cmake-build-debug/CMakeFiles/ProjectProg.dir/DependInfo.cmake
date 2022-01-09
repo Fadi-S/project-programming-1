@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/fadi/CLionProjects/Koleya/ProjectProg/helpers.c" "/Users/fadi/CLionProjects/Koleya/ProjectProg/cmake-build-debug/CMakeFiles/ProjectProg.dir/helpers.c.o"
   "/Users/fadi/CLionProjects/Koleya/ProjectProg/main.c" "/Users/fadi/CLionProjects/Koleya/ProjectProg/cmake-build-debug/CMakeFiles/ProjectProg.dir/main.c.o"
+  "/Users/fadi/CLionProjects/Koleya/ProjectProg/sort.c" "/Users/fadi/CLionProjects/Koleya/ProjectProg/cmake-build-debug/CMakeFiles/ProjectProg.dir/sort.c.o"
   "/Users/fadi/CLionProjects/Koleya/ProjectProg/validation.c" "/Users/fadi/CLionProjects/Koleya/ProjectProg/cmake-build-debug/CMakeFiles/ProjectProg.dir/validation.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

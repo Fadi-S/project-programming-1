@@ -177,6 +177,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjectProg.dir/build.make CMakeFiles/ProjectProg.dir/main.c.s
 .PHONY : main.c.s
 
+sort.o: sort.c.o
+.PHONY : sort.o
+
+# target to build an object file
+sort.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjectProg.dir/build.make CMakeFiles/ProjectProg.dir/sort.c.o
+.PHONY : sort.c.o
+
+sort.i: sort.c.i
+.PHONY : sort.i
+
+# target to preprocess a source file
+sort.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjectProg.dir/build.make CMakeFiles/ProjectProg.dir/sort.c.i
+.PHONY : sort.c.i
+
+sort.s: sort.c.s
+.PHONY : sort.s
+
+# target to generate assembly for a file
+sort.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjectProg.dir/build.make CMakeFiles/ProjectProg.dir/sort.c.s
+.PHONY : sort.c.s
+
 validation.o: validation.c.o
 .PHONY : validation.o
 
@@ -216,6 +240,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sort.o"
+	@echo "... sort.i"
+	@echo "... sort.s"
 	@echo "... validation.o"
 	@echo "... validation.i"
 	@echo "... validation.s"

@@ -4,8 +4,13 @@
 CMakeFiles/ProjectProg.dir/helpers.c.o: \
  ../helpers.c
 CMakeFiles/ProjectProg.dir/main.c.o: \
+ ../employee.h \
  ../helpers.h \
  ../main.c \
+ ../sort.h \
  ../validation.h
+CMakeFiles/ProjectProg.dir/sort.c.o: \
+ ../employee.h \
+ ../sort.c
 CMakeFiles/ProjectProg.dir/validation.c.o: \
  ../validation.c

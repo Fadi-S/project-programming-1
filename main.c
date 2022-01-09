@@ -1,29 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "employee.h"
 #include "validation.h"
 #include "helpers.h"
+#include "sort.h"
 
 char *del = ",";
 char *format = "%d,%s,%s,%d,%s,%s,%s,%d,%d,%d\n";
 int unsavedData = 0;
-
-typedef struct {
-    unsigned int year: 12;
-    unsigned int month: 4;
-    unsigned int day: 5;
-} Date;
-
-typedef struct {
-    int id;
-    char first_name[20];
-    char last_name[20];
-    int salary;
-    char email[30];
-    char phone[20];
-    char address[60];
-    Date *birthday;
-} Employee;
 
 Date *initDate(unsigned int day, unsigned int month, unsigned int year) {
     Date *date = malloc(sizeof(Date));
@@ -56,30 +41,36 @@ void freeEmployee(Employee *employee) {
 }
 
 Employee *readEmployee() {
-    int id;
+    char id[10];
     char first_name[20];
     char last_name[20];
     char email[30];
-    int salary;
+    char salary[10];
     char phone[20];
     char address[60];
     unsigned int year;
     unsigned int month;
     unsigned int day;
 
-    printf("ID: \n");
-    scanf("%d", &id);
-
-    printf("Last Name: \n");
-    scanf("%s", last_name);
-
-    printf("First Name: \n");
-    scanf("%s", first_name);
-
     int valid;
     do {
+        printf("ID: \n");
+        getString(id, 9);
+        valid = isNumeric(id);
+        if(!valid) {
+            softError("ID must be numeric\n");
+        }
+    } while (!valid);
+
+    printf("Last Name: \n");
+    getString(last_name, 19);
+
+    printf("First Name: \n");
+    getString(first_name, 19);
+
+    do {
         printf("Email: \n");
-        scanf("%s", email);
+        getString(email, 29);
         valid = isEmailValid(email);
         if(!valid) {
             softError("Email is invalid\n");
@@ -87,17 +78,20 @@ Employee *readEmployee() {
     } while (! valid);
 
     printf("Address: \n");
-    getchar();
-    fgets(address, 59, stdin);
-    if ((strlen(address) > 0) && (address[strlen (address) - 1] == '\n'))
-        address[strlen (address) - 1] = '\0';
+    getString(address, 59);
 
-    printf("Salary: \n");
-    scanf("%d", &salary);
+    do {
+        printf("Salary: \n");
+        getString(salary, 9);
+        valid = isNumeric(salary);
+        if(!valid) {
+            softError("Salary must be numeric\n");
+        }
+    } while (!valid);
 
     do {
         printf("Phone: \n");
-        scanf("%s", phone);
+        getString(phone, 19);
         valid = isPhoneValid(phone);
         if(! valid) {
             softError("Phone is invalid\n");
@@ -113,7 +107,7 @@ Employee *readEmployee() {
         }
     } while (! valid);
 
-    return initEmployee(id, first_name, last_name, salary, email, phone, address, day, month, year);
+    return initEmployee(atoi(id), first_name, last_name, atoi(salary), email, phone, address, day, month, year);
 }
 
 char *serializeEmployee(Employee *employee) {
@@ -188,88 +182,8 @@ Employee *deserializeEmployee(char employee[200]) {
 
     return initEmployee(id, first_name, last_name, salary, email, phone, address, day, month, year);
 }
-void Merge(char* arr[],int low,int mid,int high)
-{
-    int nL= mid-low+1;
-    int nR= high-mid;
 
-    char** L=malloc(sizeof(char *)*nL);
-    char** R=malloc(sizeof(char *)*nR);
-    int i;
-    for(i=0;i<nL;i++)
-    {
-        L[i]=malloc(sizeof(arr[low+i]));
-        strcpy(L[i],arr[low+i]);
-    }
-    for(i=0;i<nR;i++)
-    {
-        R[i]=malloc(sizeof(arr[mid+i+1]));
-        strcpy(R[i],arr[mid+i+1]);
-    }
-    int j=0,k;
-    i=0;
-    k=low;
-    while(i<nL&&j<nR)
-    {
-        if(strcmp(L[i],R[j])<0)strcpy(arr[k++],L[i++]);
-        else strcpy(arr[k++],R[j++]);
-    }
-    while(i<nL)strcpy(arr[k++],L[i++]);
-    while(j<nR)strcpy(arr[k++],R[j++]);
-
-}
-
-
-void MergeSortS(Employee*arr,int low,int high)
-{
-    if(low<high)
-    {
-        int mid=(low+high)/2;
-        MergeSortS(arr->salary,low,mid);
-        MergeSortS(arr->salary,mid+1,high);
-        Merge(arr->salary,low,mid,high);
-    }
-}
-void MergeSortL(Employee*arr,int low,int high)
-{
-    if(low<high)
-    {
-        int mid=(low+high)/2;
-        MergeSortL(arr->last_name,low,mid);
-        MergeSortL(arr->last_name,mid+1,high);
-        Merge(arr->last_name,low,mid,high);
-    }
-}
-void MergeSortdob(Employee*arr,int low,int high)
-{
-    if(low<high)
-    {
-        int mid=(low+high)/2;
-        MergeSortdob(arr->birthday,low,mid);
-        MergeSortdob(arr->birthday,mid+1,high);
-        Merge(arr->birthday,low,mid,high);
-    }
-}
 void printEmployee(Employee *employee) {
-    int item;
-    printf("which kind of sort do yo want \n ");
-    printf("press 1 for last name sorted\n");
-    printf("press 2 for date of birth name sorted\n");
-    printf("press 3 for salary sorted\n");
-    scanf("%d",&item);
-    switch (item) {
-        case 1:MergeSortL(employee,0, sizeof(employee));
-            break;
-        case 2:MergeSortdob(employee,0, sizeof(employee));
-            break;
-        case 3:MergeSortS(employee,0, sizeof(employee));
-            break;
-        default:
-            break;
-    }
-
-
-
     printf("ID: %d, Name: %s %s, Salary: %d, Phone: %s, Address: %s, Birthday: %d/%d/%d\n", employee->id,
            employee->first_name, employee->last_name,
            employee->salary, employee->phone, employee->address,
@@ -309,6 +223,28 @@ Employee ** loadEmployees(int *numberOfRows)
 
 void printEmployees(int n, Employee **employees)
 {
+    int item;
+    printf("Sort By: \n");
+    printf("1. Last Name\n");
+    printf("2. Date of Birth\n");
+    printf("3. Salary\n");
+    scanf("%d", &item);
+
+    switch (item) {
+        case 1:
+            sortByLname(employees, n);
+            break;
+        case 2:
+            sortByDOB(employees, n);
+            break;
+        case 3:
+            sortBySalary(employees, n);
+            break;
+        default:
+            softError("Command not found!");
+            printEmployees(n, employees);
+    }
+
     for (int i = 0; i < n; ++i) {
         printEmployee(employees[i]);
     }
