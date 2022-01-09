@@ -314,6 +314,42 @@ Employee ** addEmployee(int *n, Employee ** employees) {
     return employees;
 }
 
+Employee ** deleteEmployees(Employee **employees, int *n) {
+    char firstname[30];
+    char lastname[30];
+
+    Employee * employeesTemp[200];
+    int num = 0;
+
+    printf("Please enter Last-Name: \n");
+    getString(lastname, 29);
+    printf("Please enter First-Name: \n");
+    getString(firstname, 29);
+    for (int i = 0; i < *n; i++) {
+
+        if (strcasecmp(employees[i]->first_name, firstname) == 0
+            && strcasecmp(employees[i]->last_name, lastname) == 0) {
+            continue;
+        }
+
+        employeesTemp[num++] = employees[i];
+
+    }
+
+    free(employees);
+
+    employees = malloc(sizeof (Employee *) * num);
+
+    int i;
+    for (i = 0; i < num; ++i) {
+        employees[i] = employeesTemp[i];
+    }
+
+    *n = num;
+
+    return employees;
+}
+
 void printMenu()
 {
     printf("\n");
@@ -347,7 +383,7 @@ int main() {
 
                 break;
             case 3:
-                // TODO Delete
+                employees = deleteEmployees(employees, &employeesCount);
                 break;
             case 4:
                 // TODO Modify
