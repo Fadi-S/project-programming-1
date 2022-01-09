@@ -219,13 +219,6 @@ Employee ** loadEmployees(int *numberOfRows)
 
 void printEmployees(int n, Employee **employees)
 {
-    for (int i = 0; i < n; ++i) {
-        printEmployee(employees[i]);
-    }
-}
-
-void sortEmployees(int n, Employee **employees)
-{
     int item;
     printf("Sort By: \n");
     printf("1. Last Name\n");
@@ -236,55 +229,29 @@ void sortEmployees(int n, Employee **employees)
     switch (item) {
         case 1:
             sortByLname(employees, n);
+            for (int i = 0; i < n; ++i) {
+                printEmployee(employees[i]);
+            }
             break;
         case 2:
             sortByDOB(employees, n);
+            for (int i = 0; i < n; ++i) {
+                printEmployee(employees[i]);
+            }
             break;
         case 3:
             sortBySalary(employees, n);
+            for (int i = 0; i < n; ++i) {
+                printEmployee(employees[i]);
+            }
             break;
         default:
             softError("Command not found!");
             printEmployees(n, employees);
     }
+
+
 }
-
-Employee ** search(char *term, int *n, Employee **employees) {
-    Employee *searchedTemp[200];
-
-    int i, totalNumber = *n;
-    *n = 0;
-    for (i = 0; i < totalNumber; ++i) {
-        if(strcasecmp(employees[i]->last_name, term) == 0) {
-            searchedTemp[*n] = employees[i];
-
-            *n += 1;
-        }
-    }
-
-    int j;
-    Employee **searched = malloc(sizeof (Employee *) * *n);
-    for (j = 0; j < *n; ++j) {
-        searched[j] = searchedTemp[j];
-    }
-
-    return searched;
-}
-
-void searchEmployees(int n, Employee **employees)
-{
-    char term[20];
-    printf("Search by last name: ");
-    getString(term, 19);
-
-    Employee **searched = search(term, &n, employees);
-
-    printEmployees(n, searched);
-
-    free(searched);
-}
-
-void deleteEmployee (int n, )
 
 void saveData(int n, Employee **employees)
 {
@@ -294,8 +261,6 @@ void saveData(int n, Employee **employees)
         char *employeeStr = serializeEmployee(employees[i]);
 
         fprintf(file, "%s", employeeStr);
-
-        free(employeeStr);
     }
 
     fclose(file);
@@ -314,7 +279,6 @@ Employee ** addEmployee(int *n, Employee ** employees) {
 
     return employees;
 }
-
 void printMenu()
 {
     printf("\n");
@@ -341,7 +305,7 @@ int main() {
         scanf("%d", &item);
         switch (item) {
             case 1:
-                searchEmployees(employeesCount, employees);
+                // TODO Search
                 break;
             case 2:
                 employees = addEmployee(&employeesCount, employees);
@@ -354,7 +318,7 @@ int main() {
                 // TODO Modify
                 break;
             case 5:
-                sortEmployees(employeesCount, employees);
+                printEmployees(employeesCount, employees);
                 break;
             case 6:
                 saveData(employeesCount, employees);
