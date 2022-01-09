@@ -1,8 +1,0 @@
-12345,asdfghj,dfgyhuj,123456,wsedrcftvgbhnj,sedrtgyhu,drftgbhnj,25,4,2002
-7432,Sarwat,Fadi,20000,fady.sarwat377@gmail.com,01273315870,4 st,25,4,2002
-323432,Sarwat,Fadi,20983,fadisarwat@yahoo.com,01234567890,fgd,30,12,2013
-1234,asdf,sdfg,12345,asdfg@asd,01273315879,1234wedfg,8,1,2019
-12345,sadasd,fdsfs,12345,fdsfaf@rdsf,01234567890,fdsf dfsdfs,5,6,2002
-1234,12345,1234567,2542,Helloworld@fdsfd.com,01234567891,dsaf34 432rew sfd,9,5,2002
-12345,fgdsjfghsd,jfgdsdfg,454,ghdfhd@hjfg,12345678954,5df46 d4,5,4,2001
-45487,jgjkfdg,sdfkjghfd,4548,fadi@fdsfgd,01234567895,4fg4fdg54dfs,29,2,2020
