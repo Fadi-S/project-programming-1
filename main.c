@@ -35,11 +35,6 @@ Employee *initEmployee(int id, char *first_name, char *last_name, int salary, ch
     return employee;
 }
 
-void freeEmployee(Employee *employee) {
-    free(employee->birthday);
-    free(employee);
-}
-
 Employee *readEmployee() {
     char id[10];
     char first_name[20];
@@ -303,14 +298,17 @@ int main() {
         scanf("%d", &item);
         switch (item) {
             case 1:
+                // TODO Search
                 break;
             case 2:
                 employees = addEmployee(&employeesCount, employees);
 
                 break;
             case 3:
+                // TODO Delete
                 break;
             case 4:
+                // TODO Modify
                 break;
             case 5:
                 printEmployees(employeesCount, employees);
