@@ -194,7 +194,8 @@ Employee ** loadEmployees(int *numberOfRows)
 {
     FILE *file = fopen("employees.txt", "r");
     if(! file) {
-        return NULL;
+        * numberOfRows = 0;
+        return malloc(0);
     }
 
     Employee * employeesTemp[100];
