@@ -344,8 +344,8 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
 
         if (strcasecmp(employees[i]->first_name, firstname) == 0
             && strcasecmp(employees[i]->last_name, lastname) == 0) {
-            continue;
             unsavedData = 1;
+            continue;
         }
 
         employeesTemp[num++] = employees[i];
