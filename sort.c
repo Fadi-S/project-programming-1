@@ -45,7 +45,7 @@ void mergeSort(Employee **arr, int low, int mid, int high, char *key) {
         if(strcasecmp(key, "last_name") == 0) {
             check = strcasecmp(L[i]->last_name, R[j]->last_name) < 0;
         }else if(strcasecmp(key, "salary") == 0) {
-            check = L[i]->salary > R[j]->salary;
+            check = L[i]->salary < R[j]->salary;
         }else if(strcasecmp(key, "birthday") == 0) {
             check = compareDates(L[i]->birthday, R[j]->birthday) < 0;
         }

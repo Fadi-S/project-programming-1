@@ -44,9 +44,9 @@ Employee *readEmployee() {
     char salary[10];
     char phone[20];
     char address[60];
-    unsigned int year;
-    unsigned int month;
-    unsigned int day;
+    unsigned int year = 2020;
+    unsigned int month = 0;
+    unsigned int day = 0;
 
     int valid;
     do {
@@ -227,25 +227,39 @@ void printEmployees(int n, Employee **employees)
 
 void sortEmployees(int n, Employee **employees)
 {
-    int item;
-    printf("Sort By: \n");
+    char item[2];
+    printf("\nSort By: \n");
     printf("1. Last Name\n");
     printf("2. Date of Birth\n");
     printf("3. Salary\n");
-    scanf("%d", &item);
 
-    switch (item) {
+    int isValid;
+    do {
+        printf("Choose: ");
+        getString(item, 1);
+        isValid = isdigit(item[0]);
+        if(isValid) {
+            item[0] = item[0] - '0';
+            isValid = item[0] >= 1 && item[0] <= 3;
+        }
+    } while (!isValid);
+
+    switch (item[0]) {
         case 1:
+            printf("\nBy Last Name: \n");
             sortByLname(employees, n);
             break;
         case 2:
+            printf("\nBy Date of Birth: \n");
             sortByDOB(employees, n);
             break;
         case 3:
+            printf("\nBy Salary: \n");
             sortBySalary(employees, n);
             break;
         default:
             softError("Command not found!");
+            return;
     }
 
     printEmployees(n, employees);
@@ -327,13 +341,11 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     printf("Please enter First-Name: \n");
     getString(firstname, 29);
     for (int i = 0; i < *n; i++) {
-        if (strcasecmp(employees[i]->first_name, firstname)
-            && strcasecmp(employees[i]->last_name, lastname) )
-        {printf("employee not found");
-            break;}
-        else if (strcasecmp(employees[i]->first_name, firstname) == 0
+
+        if (strcasecmp(employees[i]->first_name, firstname) == 0
             && strcasecmp(employees[i]->last_name, lastname) == 0) {
             continue;
+            unsavedData = 1;
         }
 
         employeesTemp[num++] = employees[i];
@@ -350,12 +362,12 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     }
 
     *n = num;
-unsavedData=1;
+
     return employees;
 }
 void modifyEmployees(int n,Employee **employees)
 {
-    int i, id;
+    int i, id, found=0;
     printf("Please enter employee's id: ");
     scanf("%d", &id);
 
@@ -364,41 +376,56 @@ void modifyEmployees(int n,Employee **employees)
         if(employees[i]->id == id) {
             printf("Please enter the new data: \n");
             employees[i] = readEmployee();
+            unsavedData = found = 1;
         }
     }
-    unsavedData=1;
+
+    if(! found) {
+        printf("No employee found with that id!\n");
+    }
 }
 
 void printMenu()
 {
     printf("\n");
-    printf("To Search employee:        Press (1) \n");
-    printf("To Add employee:           Press (2) \n");
-    printf("To Delete employee:        Press (3) \n");
-    printf("To Modify employee:        Press (4) \n");
-    printf("To Print employees (sort): Press (5) \n");
-    printf("To Save data:              Press (6) \n");
-    printf("To Quit:                   Press (7) \n");
+    printf("1. To Search employee:        Press (1) \n");
+    printf("2. To Add employee:           Press (2) \n");
+    printf("3. To Delete employee:        Press (3) \n");
+    printf("4. To Modify employee:        Press (4) \n");
+    printf("5. To Print employees (sort): Press (5) \n");
+    printf("6. To Save data:              Press (6) \n");
+    printf("7. To Quit:                   Press (7) \n");
 }
-
 
 
 int main() {
     printf("Welcome To Our Programme, \n");
 
-    int employeesCount;
+    int employeesCount, loopCount=0;
     Employee ** employees = loadEmployees(&employeesCount);
 
-    char item;
+    char item[2];
+    char quit[2];
 
     do {
-        printMenu();
-        printf("Enter command number: ");
-        scanf("%c", &item);
-        if(isdigit(item)) {
-            item = item - '0';
+        if(loopCount) {
+            printf("\nPress enter to continue...");
+            getchar();
         }
-        switch (item) {
+
+        printMenu();
+        int isValid;
+        do {
+            printf("Enter command number: ");
+            getString(item, 1);
+            isValid = isdigit(item[0]);
+            if(isValid) {
+                item[0] = item[0] - '0';
+                isValid = item[0] >= 1 && item[0] <= 7;
+            }
+        } while(! isValid);
+
+        switch (item[0]) {
             case 1:
                 searchEmployees(employeesCount, employees);
                 break;
@@ -419,27 +446,26 @@ int main() {
                 saveData(employeesCount, employees);
                 break;
             case 7:
-
-                /*if(unsavedData)
-                {
-                    printf("you didn't save your data do you want to save it\n ");
-                    printf("if yes press 7");
-                    char c=getchar();
-                    if (c=='7')
-                        saveData(employeesCount,employees);
-                    else
+                if(unsavedData) {
+                    printf("\nAre you sure you want to quit? You have unsaved data [y/N] ");
+                    getString(quit, 1);
+                    if(strcasecmp(quit, "y") == 0) {
+                        printf("\nSee You Next Time ;) ");
                         exit(0);
+                    }
 
-                }
-                else if (unsavedData==0) {*/
+                    item[0] = 8;
+                    loopCount = -1;
+                } else {
                     printf("\nSee You Next Time ;) ");
                     exit(0);
-
+                }
             default:
                 softError("Command not found!");
-
         }
-    } while (item != 7);
+
+        loopCount++;
+    } while (item[0] != 7);
 
     return 0;
 }
