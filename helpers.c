@@ -24,6 +24,11 @@ void validateFile(FILE *file) {
     }
 }
 
+void removeNewLine(char * string) {
+    if ((strlen(string) > 0) && (string[strlen (string) - 1] == '\n')) // Remove last character if n line
+        string[strlen (string) - 1] = '\0';
+}
+
 void getString(char * string, int limit)
 {
     char empty;
@@ -34,8 +39,7 @@ void getString(char * string, int limit)
     }
 
     fgets(string, limit, stdin);
-    if ((strlen(string) > 0) && (string[strlen (string) - 1] == '\n')) // Remove last character if n line
-        string[strlen (string) - 1] = '\0';
+    removeNewLine(string);
 
     fflush(stdin);
 }

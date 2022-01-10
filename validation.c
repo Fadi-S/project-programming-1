@@ -87,6 +87,10 @@ int isEmailValid(char *email) {
 }
 
 int isDateValid(unsigned int day, unsigned int month, unsigned int year) {
+    if (year < 1900) {
+        return 0;
+    }
+
     if (month < 1 || month > 12) {
         return 0;
     }

@@ -7,8 +7,8 @@
 #include "helpers.h"
 #include "sort.h"
 
-char *del = ",";
-char *format = "%d,%s,%s,%d,%s,%s,%s,%d,%d,%d\n";
+char *del = ",-";
+char *format = "%d,%s,%s,%d,%d-%d-%d,%s,%s,%s";
 int unsavedData = 0;
 
 Date *initDate(unsigned int day, unsigned int month, unsigned int year) {
@@ -110,9 +110,9 @@ char *serializeEmployee(Employee *employee) {
     char employeeStr[200];
     sprintf(employeeStr, format,
             employee->id, employee->last_name, employee->first_name, employee->salary,
+            employee->birthday->day, employee->birthday->month, employee->birthday->year,
             employee->email,
-            employee->phone, employee->address,
-            employee->birthday->day, employee->birthday->month, employee->birthday->year);
+            employee->phone, employee->address);
 
     char *str = malloc(strlen(employeeStr) + 1);
 
@@ -131,7 +131,7 @@ Employee *deserializeEmployee(char employee[200]) {
     int salary;
     char phone[20];
     char address[60];
-    unsigned int year = 2022;
+    unsigned int year = 0;
     unsigned int month = 0;
     unsigned int day = 0;
 
@@ -153,22 +153,23 @@ Employee *deserializeEmployee(char employee[200]) {
                 salary = atoi(token);
                 break;
             case 4:
-                strcpy(email, token);
-                break;
-            case 5:
-                strcpy(phone, token);
-                break;
-            case 6:
-                strcpy(address, token);
-                break;
-            case 7:
                 day = atoi(token);
                 break;
-            case 8:
+            case 5:
                 month = atoi(token);
                 break;
-            case 9:
+            case 6:
                 year = atoi(token);
+                break;
+            case 7:
+                strcpy(email, token);
+                break;
+            case 8:
+                strcpy(phone, token);
+                break;
+            case 9:
+                strcpy(address, token);
+                removeNewLine(address);
                 break;
         }
 
@@ -307,9 +308,10 @@ void saveData(int n, Employee **employees)
     for (int i = 0; i < n; i++) {
         char *employeeStr = serializeEmployee(employees[i]);
 
-        fprintf(file, "%s", employeeStr);
+        if ((strlen(employeeStr) > 0) && (employeeStr[strlen (employeeStr) - 1] == '\n')) // Remove last character if n line
+            employeeStr[strlen (employeeStr) - 1] = '\0';
 
-        free(employeeStr);
+        fprintf(file, "%s\n", employeeStr);
     }
 
     fclose(file);
