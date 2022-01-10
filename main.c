@@ -308,8 +308,7 @@ void saveData(int n, Employee **employees)
     for (int i = 0; i < n; i++) {
         char *employeeStr = serializeEmployee(employees[i]);
 
-        if ((strlen(employeeStr) > 0) && (employeeStr[strlen (employeeStr) - 1] == '\n')) // Remove last character if n line
-            employeeStr[strlen (employeeStr) - 1] = '\0';
+        removeNewLine(employeeStr);
 
         fprintf(file, "%s\n", employeeStr);
     }
