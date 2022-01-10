@@ -9,6 +9,7 @@
 
 char *del = ",-";
 char *format = "%d,%s,%s,%d,%d-%d-%d,%s,%s,%s";
+char *fileName = "employees.txt";
 int unsavedData = 0;
 
 Date *initDate(unsigned int day, unsigned int month, unsigned int year) {
@@ -189,7 +190,7 @@ void printEmployee(Employee *employee) {
 
 Employee ** loadEmployees(int *numberOfRows)
 {
-    FILE *file = fopen("employees.txt", "r");
+    FILE *file = fopen(fileName, "r");
     if(! file) {
         * numberOfRows = 0;
         return malloc(0);
@@ -303,7 +304,7 @@ void searchEmployees(int n, Employee **employees)
 
 void saveData(int n, Employee **employees)
 {
-    FILE *file = fopen("employees.txt", "w");
+    FILE *file = fopen(fileName, "w");
     validateFile(file);
     for (int i = 0; i < n; i++) {
         char *employeeStr = serializeEmployee(employees[i]);
