@@ -327,8 +327,11 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     printf("Please enter First-Name: \n");
     getString(firstname, 29);
     for (int i = 0; i < *n; i++) {
-
-        if (strcasecmp(employees[i]->first_name, firstname) == 0
+        if (strcasecmp(employees[i]->first_name, firstname)
+            && strcasecmp(employees[i]->last_name, lastname) )
+        {printf("employee not found");
+            break;}
+        else if (strcasecmp(employees[i]->first_name, firstname) == 0
             && strcasecmp(employees[i]->last_name, lastname) == 0) {
             continue;
         }
@@ -347,7 +350,7 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     }
 
     *n = num;
-
+unsavedData=1;
     return employees;
 }
 void modifyEmployees(int n,Employee **employees)
@@ -363,6 +366,7 @@ void modifyEmployees(int n,Employee **employees)
             employees[i] = readEmployee();
         }
     }
+    unsavedData=1;
 }
 
 void printMenu()
@@ -376,6 +380,7 @@ void printMenu()
     printf("To Save data:              Press (6) \n");
     printf("To Quit:                   Press (7) \n");
 }
+
 
 
 int main() {
@@ -414,8 +419,22 @@ int main() {
                 saveData(employeesCount, employees);
                 break;
             case 7:
-                printf("\nSee You Next Time ;) ");
-                exit(0);
+
+                /*if(unsavedData)
+                {
+                    printf("you didn't save your data do you want to save it\n ");
+                    printf("if yes press 7");
+                    char c=getchar();
+                    if (c=='7')
+                        saveData(employeesCount,employees);
+                    else
+                        exit(0);
+
+                }
+                else if (unsavedData==0) {*/
+                    printf("\nSee You Next Time ;) ");
+                    exit(0);
+
             default:
                 softError("Command not found!");
 
