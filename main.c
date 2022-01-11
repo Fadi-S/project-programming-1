@@ -472,20 +472,8 @@ int main() {
                 saveData(employeesCount, employees);
                 break;
             case 7:
-                if(unsavedData) {
-                    printf("\nAre you sure you want to quit? You have unsaved data [y/N] ");
-                    getString(quit, 1);
-                    if(strcasecmp(quit, "y") == 0) {
-                        printf("\nSee You Next Time ;) ");
-                        exit(0);
-                    }
-
-                    item[0] = 8;
-                    loopCount = -1;
-                } else {
-                    printf("\nSee You Next Time ;) ");
-                    exit(0);
-                }
+                printf("\nSee You Next Time ;) ");
+                exit(0);
             default:
                 softError("Command not found!");
         }
