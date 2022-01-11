@@ -195,6 +195,7 @@ void printEmployee(Employee *employee) {
 
 void freeEmployees(Employee ** employees, int n) {
     int i;
+
     for (i = 0; i < n; i++) {
         free(employees[i]->birthday);
         free(employees[i]);
@@ -373,9 +374,9 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     }
 
     if(deleted) {
-        printf("User deleted successfully\n");
+        printf("Employee deleted successfully\n");
     }else {
-        printf("No user found with these data\n");
+        printf("No employee found with these data\n");
     }
 
     employees = malloc(sizeof (Employee *) * num);
