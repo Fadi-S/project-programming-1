@@ -408,6 +408,8 @@ void modifyEmployees(int n, Employee **employees)
 
     if(! found) {
         printf("No employee found with that id!\n");
+    }else {
+        printf("Employee modified successfully!\n");
     }
 }
 
