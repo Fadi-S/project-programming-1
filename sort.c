@@ -48,6 +48,8 @@ void mergeSort(Employee **arr, int low, int mid, int high, char *key) {
             check = L[i]->salary < R[j]->salary;
         }else if(strcasecmp(key, "birthday") == 0) {
             check = compareDates(L[i]->birthday, R[j]->birthday) < 0;
+        }else if(strcasecmp(key, "id") == 0) {
+            check = L[i]->id < R[j]->id;
         }
 
         if (check)
@@ -83,4 +85,8 @@ void sortByDOB(Employee** employees, int n) {
 
 void sortBySalary(Employee** employees, int n) {
     sort(employees, 0, n-1, "salary");
+}
+
+void sortByID(Employee** employees, int n) {
+    sort(employees, 0, n-1, "id");
 }

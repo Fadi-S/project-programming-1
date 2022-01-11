@@ -193,6 +193,16 @@ void printEmployee(Employee *employee) {
            employee->birthday->day, employee->birthday->month, employee->birthday->year);
 }
 
+void freeEmployees(Employee ** employees, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        free(employees[i]->birthday);
+        free(employees[i]);
+    }
+
+    free(employees);
+}
+
 Employee ** loadEmployees(int *numberOfRows)
 {
     FILE *file = fopen(fileName, "r");
@@ -227,7 +237,8 @@ Employee ** loadEmployees(int *numberOfRows)
 
 void printEmployees(int n, Employee **employees)
 {
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for (i = 0; i < n; ++i) {
         printEmployee(employees[i]);
     }
 }
@@ -304,13 +315,15 @@ void searchEmployees(int n, Employee **employees)
 
     printEmployees(n, searched);
 
-    free(searched);
+    freeEmployees(searched, n);
 }
 
 void saveData(int n, Employee **employees)
 {
     FILE *file = fopen(fileName, "w");
     validateFile(file);
+
+    sortByID(employees, n);
     for (int i = 0; i < n; i++) {
         char *employeeStr = serializeEmployee(employees[i]);
 
@@ -341,25 +354,27 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
     char lastname[30];
 
     Employee * employeesTemp[200];
-    int num = 0;
+    int num = 0, deleted=0;
 
     printf("Please enter Last-Name: \n");
     getString(lastname, 29);
     printf("Please enter First-Name: \n");
     getString(firstname, 29);
     for (int i = 0; i < *n; i++) {
-
         if (strcasecmp(employees[i]->first_name, firstname) == 0
             && strcasecmp(employees[i]->last_name, lastname) == 0) {
-            unsavedData = 1;
+            unsavedData = deleted = 1;
             continue;
         }
 
         employeesTemp[num++] = employees[i];
-
     }
 
-    free(employees);
+    if(deleted) {
+        printf("User deleted successfully\n");
+    }else {
+        printf("No user found with these data\n");
+    }
 
     employees = malloc(sizeof (Employee *) * num);
 
@@ -372,7 +387,8 @@ Employee ** deleteEmployees(Employee **employees, int *n) {
 
     return employees;
 }
-void modifyEmployees(int n,Employee **employees)
+
+void modifyEmployees(int n, Employee **employees)
 {
     int i, id, found=0;
     printf("Please enter employee's id: ");

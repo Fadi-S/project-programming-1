@@ -7,4 +7,6 @@ void sortByDOB(Employee** employees, int n);
 
 void sortBySalary(Employee** employees, int n);
 
+void sortByID(Employee** employees, int n);
+
 #endif //PROJECTPROG_SORT_H
