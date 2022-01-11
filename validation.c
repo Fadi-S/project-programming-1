@@ -5,7 +5,11 @@ int isPhoneValid(char *str) {
     int i;
     int valid = 1;
 
-    if (strlen(str) < 11 || strlen(str) > 12)
+    if(str[0] != '0' || str[1] != '1') {
+        return 0;
+    }
+
+    if (strlen(str) != 11)
         return 0;
 
     for (i = 0; i < strlen(str); i++) {
