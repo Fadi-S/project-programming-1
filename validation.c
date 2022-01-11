@@ -28,7 +28,17 @@ int isAllowed(char str) {
 }
 
 int isNumeric(char * str) {
+    int dot = 0;
     for (int i = 0; i < strlen(str); ++i) {
+        if(str[i] == '.') {
+            if(dot) {
+                return 0;
+            }
+
+            dot = 1;
+            continue;
+        }
+
         if(! isdigit(str[i])) {
             return 0;
         }

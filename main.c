@@ -8,8 +8,8 @@
 #include "sort.h"
 
 char *del = ",-";
-char *format = "%d,%s,%s,%d,%d-%d-%d,%s,%s,%s";
-char *fileName = "employees.txt";
+char *format = "%d,%s,%s,%.2f,%d-%d-%d,%s,%s,%s";
+char *fileName = "Company.txt";
 int unsavedData = 0;
 
 Date *initDate(unsigned int day, unsigned int month, unsigned int year) {
@@ -22,7 +22,7 @@ Date *initDate(unsigned int day, unsigned int month, unsigned int year) {
     return date;
 }
 
-Employee *initEmployee(int id, char *first_name, char *last_name, int salary, char *email, char *phone,
+Employee *initEmployee(int id, char *first_name, char *last_name, float salary, char *email, char *phone,
                        char *address, unsigned int day, unsigned int month, unsigned int year) {
     Employee *employee = malloc(sizeof(Employee));
 
@@ -45,7 +45,7 @@ Employee *readEmployee() {
     char salary[10];
     char phone[20];
     char address[60];
-    unsigned int year = 2020;
+    unsigned int year = 0;
     unsigned int month = 0;
     unsigned int day = 0;
 
@@ -104,7 +104,7 @@ Employee *readEmployee() {
         }
     } while (! valid);
 
-    return initEmployee(atoi(id), first_name, last_name, atoi(salary), email, phone, address, day, month, year);
+    return initEmployee(atoi(id), first_name, last_name, atof(salary), email, phone, address, day, month, year);
 }
 
 char *serializeEmployee(Employee *employee) {
@@ -129,7 +129,7 @@ Employee *deserializeEmployee(char employee[200]) {
     char first_name[20];
     char last_name[20];
     char email[30];
-    int salary;
+    float salary;
     char phone[20];
     char address[60];
     unsigned int year = 0;
@@ -151,7 +151,7 @@ Employee *deserializeEmployee(char employee[200]) {
                 strcpy(first_name, token);
                 break;
             case 3:
-                salary = atoi(token);
+                salary = atof(token);
                 break;
             case 4:
                 day = atoi(token);
@@ -182,7 +182,7 @@ Employee *deserializeEmployee(char employee[200]) {
 }
 
 void printEmployee(Employee *employee) {
-    printf("ID: %d, Name: %s %s, Salary: %d, Phone: %s, Address: %s, Birthday: %d/%d/%d\n", employee->id,
+    printf("ID: %d, Name: %s %s, Salary: %.2f, Phone: %s, Address: %s, Birthday: %d/%d/%d\n", employee->id,
            employee->first_name, employee->last_name,
            employee->salary, employee->phone, employee->address,
            employee->birthday->day, employee->birthday->month, employee->birthday->year);

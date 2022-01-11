@@ -10,7 +10,7 @@ typedef struct {
     int id;
     char first_name[20];
     char last_name[20];
-    int salary;
+    float salary;
     char email[30];
     char phone[20];
     char address[60];
