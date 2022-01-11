@@ -45,9 +45,9 @@ Employee *readEmployee() {
     char salary[10];
     char phone[20];
     char address[60];
-    unsigned int year = 0;
-    unsigned int month = 0;
-    unsigned int day = 0;
+    char year[5] = "0";
+    char month[3] = "0";
+    char day[3] = "0";
 
     int valid;
     do {
@@ -96,15 +96,20 @@ Employee *readEmployee() {
     } while (! valid);
 
     do {
-        printf("Date (d/m/y) \n");
-        scanf("%d/%d/%d", &day, &month, &year);
-        valid = isDateValid(day, month, year);
+        printf("Birthday: \n");
+        printf("Day: ");
+        getString(day, 3);
+        printf("Month: ");
+        getString(month, 3);
+        printf("Year: ");
+        getString(year, 5);
+        valid = isNumeric(day) && isNumeric(month) && isNumeric(year) && isDateValid(atoi(day), atoi(month), atoi(year));
         if(! valid) {
             softError("Birthday is invalid\n");
         }
     } while (! valid);
 
-    return initEmployee(atoi(id), first_name, last_name, atof(salary), email, phone, address, day, month, year);
+    return initEmployee(atoi(id), first_name, last_name, atof(salary), email, phone, address, atoi(day), atoi(month), atoi(year));
 }
 
 char *serializeEmployee(Employee *employee) {
@@ -112,8 +117,8 @@ char *serializeEmployee(Employee *employee) {
     sprintf(employeeStr, format,
             employee->id, employee->last_name, employee->first_name, employee->salary,
             employee->birthday->day, employee->birthday->month, employee->birthday->year,
-            employee->email,
-            employee->phone, employee->address);
+            employee->address,
+            employee->phone, employee->email);
 
     char *str = malloc(strlen(employeeStr) + 1);
 
@@ -163,14 +168,14 @@ Employee *deserializeEmployee(char employee[200]) {
                 year = atoi(token);
                 break;
             case 7:
-                strcpy(email, token);
+                strcpy(address, token);
                 break;
             case 8:
                 strcpy(phone, token);
                 break;
             case 9:
-                strcpy(address, token);
-                removeNewLine(address);
+                strcpy(email, token);
+                removeNewLine(email);
                 break;
         }
 
