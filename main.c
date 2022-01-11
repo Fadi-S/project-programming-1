@@ -313,9 +313,11 @@ void searchEmployees(int n, Employee **employees)
 
     Employee **searched = search(term, &n, employees);
 
-    printEmployees(n, searched);
+    if(n == 0) {
+        printf("No employee found with last name %s\n", term);
+    }
 
-    freeEmployees(searched, n);
+    printEmployees(n, searched);
 }
 
 void saveData(int n, Employee **employees)
