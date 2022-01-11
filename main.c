@@ -53,7 +53,7 @@ Employee *readEmployee() {
     do {
         printf("ID: \n");
         getString(id, 9);
-        valid = isNumeric(id);
+        valid = isNumeric(id, 0);
         if(!valid) {
             softError("ID must be numeric\n");
         }
@@ -80,7 +80,7 @@ Employee *readEmployee() {
     do {
         printf("Salary: \n");
         getString(salary, 9);
-        valid = isNumeric(salary);
+        valid = isNumeric(salary, 1);
         if(!valid) {
             softError("Salary must be numeric\n");
         }
@@ -103,7 +103,10 @@ Employee *readEmployee() {
         getString(month, 3);
         printf("Year: ");
         getString(year, 5);
-        valid = isNumeric(day) && isNumeric(month) && isNumeric(year) && isDateValid(atoi(day), atoi(month), atoi(year));
+        valid = isNumeric(day, 0)
+                && isNumeric(month, 0)
+                && isNumeric(year, 0)
+                && isDateValid(atoi(day), atoi(month), atoi(year));
         if(! valid) {
             softError("Birthday is invalid\n");
         }

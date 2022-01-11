@@ -31,16 +31,18 @@ int isAllowed(char str) {
     return isalnum(str) || isSymbol(str);
 }
 
-int isNumeric(char * str) {
+int isNumeric(char * str, int isFloat) {
     int dot = 0;
     for (int i = 0; i < strlen(str); ++i) {
-        if(str[i] == '.') {
-            if(dot) {
-                return 0;
-            }
+        if(isFloat) {
+            if (str[i] == '.') {
+                if (dot) {
+                    return 0;
+                }
 
-            dot = 1;
-            continue;
+                dot = 1;
+                continue;
+            }
         }
 
         if(! isdigit(str[i])) {
